@@ -19,6 +19,7 @@ int main() {
 				++unmatchedParenthesis;
 			}
 			else if (sequence[i] == ')' && lastMatched == '(') {
+				lastMatched = '[';
 				--unmatchedParenthesis;
 			}
 			else if (sequence[i] == '[') {
@@ -26,6 +27,7 @@ int main() {
 				++unmatchedBracket;
 			}
 			else if (sequence[i] == ']' && lastMatched == '[') {
+				lastMatched = '(';
 				--unmatchedBracket;
 			}
 		//cerr << "PARA " << unmatchedParenthesis << endl;
