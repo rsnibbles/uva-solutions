@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <cstring>
 using namespace std;
 int main() {
@@ -9,25 +10,27 @@ int main() {
 		char sequence[128];
 		cin >> sequence;
 
-		char lastMatched = ' ';
+		vector<char> paraStack;	
 		long unmatchedParenthesis = 0;
 		long unmatchedBracket = 0;
 
 		for (int i = 0; i < strlen(sequence); ++i) {
 			if (sequence[i] == '(') {
-				lastMatched = '(';
+				paraStack.push_back('(');
 				++unmatchedParenthesis;
 			}
-			else if (sequence[i] == ')' && lastMatched == '(') {
-				lastMatched = '[';
+			else if (sequence[i] == ')') {
+				if (paraStack.back() == '(')
+					paraStack.pop_back();
 				--unmatchedParenthesis;
 			}
 			else if (sequence[i] == '[') {
-				lastMatched = '[';
+				paraStack.push_back('[');
 				++unmatchedBracket;
 			}
-			else if (sequence[i] == ']' && lastMatched == '[') {
-				lastMatched = '(';
+			else if (sequence[i] == ']') {
+				if (paraStack.back() == '[')
+					paraStack.pop_back();
 				--unmatchedBracket;
 			}
 		//cerr << "PARA " << unmatchedParenthesis << endl;
