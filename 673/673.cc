@@ -6,7 +6,7 @@ int main() {
 	unsigned int numCases = 0;
 	cin >> numCases;
 
-	for (int index = 0; index < numCases; ++index) {
+	for (int kase = 0; kase < numCases; ++kase) {
 		char sequence[128];
 		cin >> sequence;
 
