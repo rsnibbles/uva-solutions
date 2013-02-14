@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include <stack>
 #include <cstring>
 using namespace std;
 int main() {
@@ -10,35 +10,37 @@ int main() {
 		char sequence[128];
 		cin >> sequence;
 
-		vector<char> paraStack;	
-		long unmatchedParenthesis = 0;
-		long unmatchedBracket = 0;
+		stack<char> paraStack;
 
-		for (int i = 0; i < strlen(sequence); ++i) {
-			if (sequence[i] == '(') {
-				paraStack.push_back('(');
-				++unmatchedParenthesis;
+		bool fail = false;
+		for (int index = 0; index < strlen(sequence); ++index) {
+			if (sequence[index] == '(') {
+				paraStack.push('(');
 			}
-			else if (sequence[i] == ')') {
-				if (paraStack.back() == '(')
-					paraStack.pop_back();
-				--unmatchedParenthesis;
+			else if (sequence[index] == '[') {
+				paraStack.push('[');
 			}
-			else if (sequence[i] == '[') {
-				paraStack.push_back('[');
-				++unmatchedBracket;
+			else if (sequence[index] == ')') {
+				if (!paraStack.empty() && paraStack.top() == '(')
+					paraStack.pop();
+				else
+					fail = true;
 			}
-			else if (sequence[i] == ']') {
-				if (paraStack.back() == '[')
-					paraStack.pop_back();
-				--unmatchedBracket;
+			else if (sequence[index] == ']') {
+				if (!paraStack.empty() && paraStack.top() == '[')
+					paraStack.pop();
+				else
+					fail = true;
 			}
-		//cerr << "PARA " << unmatchedParenthesis << endl;
-		//cerr << "BRAK " << unmatchedBracket << endl;
+			if (fail)
+				break;
 		}
-		if (unmatchedParenthesis == 0 && unmatchedBracket == 0)
+
+		if (paraStack.empty() && !fail)
 			cout << "Yes" << endl;
 		else
 			cout << "No" << endl;
 	}
+
+	return 0;
 }
