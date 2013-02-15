@@ -1,14 +1,20 @@
+#include <cstdlib>
 #include <iostream>
 #include <stack>
 #include <cstring>
 using namespace std;
 int main() {
 	unsigned int numCases = 0;
-	cin >> numCases;
+	string asdf;
+	getline(cin, asdf);
+	numCases = atoi(asdf.c_str());
 
 	for (int kase = 0; kase < numCases; ++kase) {
-		char sequence[128];
-		cin >> sequence;
+		string temp;
+		getline(cin, temp);
+		char sequence[129];
+		sequence[129] = '\0';
+		strcpy(sequence, temp.c_str());
 
 		stack<char> paraStack;
 
