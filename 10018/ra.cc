@@ -31,13 +31,13 @@ int main() {
 		cin >> number;
 
 		unsigned int iterations = 0;
-		do {
+		while (!isPalindrome(number)) {
 			stringstream ss;
 			unsigned long long intermediate = atoi(reverse(number).c_str()) + atoi(number.c_str());
 			ss << intermediate;
 			number = ss.str();
 			++iterations;
-		} while (!isPalindrome(number) && iterations < 1000);
+		}
 		cout << iterations << " " << number << endl;
 	}
 
